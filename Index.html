@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battery API Example</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      transition: background-color 0.3s ease;
+    }
+    h1 {
+      font-size: 24px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Check Battery Charging Status</h1>
+  <script>
+    // Battery API 사용
+    navigator.getBattery().then((battery) => {
+      // 배경색을 설정하는 함수
+      const updateBackground = () => {
+        if (battery.charging) {
+          document.body.style.backgroundColor = "green";
+        } else {
+          document.body.style.backgroundColor = "white";
+        }
+      };
+
+      // 초기 배경색 설정
+      updateBackground();
+
+      // 충전 상태 변화 감지
+      battery.addEventListener("chargingchange", updateBackground);
+    });
+  </script>
+</body>
+</html>
